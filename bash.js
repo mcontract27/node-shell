@@ -1,5 +1,6 @@
-const commands = require('./pwd.js');
-const ls = require('./ls.js');
+let commands = {};
+commands.pwd = require('./pwd.js');
+commands.ls = require('./ls.js');
 
 process.stdout.write('prompt > ');
 
@@ -7,10 +8,10 @@ process.stdin.on('data', (data) => {
     const cmd = data.toString().trim();
 
     try {
-        commands[cmd]();
+        commands[cmd][cmd]();
     } catch(e){
-        process.stdout.write(codee.toString());
+        process.stdout.write(e.toString());
+        process.stdout.write('\nprompt > ');
     }
 
-    process.stdout.write('\nprompt > ');
 });
